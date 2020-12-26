@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="weather"
+            type="dev.mgck.databindingsample.data.ObservableWeatherData" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/labelCurrentTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_temp"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/fieldCurrentTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(weather.current_temp)}"
+                android:layout_marginStart="8dp"
+                android:textSize="24sp"
+                tools:text="TEMP"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/labelConditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_cond"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/fieldConditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{weather.current_cond}"
+                android:layout_marginStart="8dp"
+                android:textSize="24sp"
+                tools:text="TEMP"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/labelWindChill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wind_chill"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/fieldWindChill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(weather.current_windchill)}"
+                android:layout_marginStart="8dp"
+                android:textSize="24sp"
+                tools:text="TEMP"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/labelFeelsLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feels_like"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/fieldFeelsLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="@{Integer.toString(weather.current_temp - weather.current_windchill)}"
+                android:textStyle="bold"
+                tools:text="TEMP"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_temp"
+                android:textSize="24sp"
+                android:layout_marginTop="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnTempUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnPlus"
+                    android:textSize="18sp"
+                    android:onClick="@{() -> weather.onIncreaseTemp()}"/>
+                <Button
+                    android:id="@+id/btnTempDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnMinus"
+                    android:textSize="18sp"
+                    android:onClick="@{() -> weather.onDecreaseTemp()}"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

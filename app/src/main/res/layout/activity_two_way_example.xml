@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="dev.mgck.databindingsample.util.Converters"/>
+
+        <variable
+            name="weather"
+            type="dev.mgck.databindingsample.data.WeatherViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".TwoWayExample">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_temp"
+                android:textSize="24sp"
+                android:labelFor="@+id/edCurTemp"/>
+
+            <TextView
+                android:id="@+id/edCurTemp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(weather.current_temp)}"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnPlus"
+                android:textSize="18sp"
+                android:onClick="@{() -> weather.onIncreaseTemp()}"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btnMinus"
+                android:textSize="18sp"
+                android:onClick="@{() -> weather.onDecreaseTemp()}"/>
+        </LinearLayout>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:min="-50"
+            android:max="50"
+            android:progress="@={weather.current_temp}"
+            android:layout_marginTop="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="@{Converters.tempToDescription(weather.current_temp)}"
+                android:textStyle="bold"
+                tools:text="TEMP"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
